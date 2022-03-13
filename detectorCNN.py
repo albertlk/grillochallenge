@@ -8,8 +8,8 @@ from tensorflow.keras.models import load_model
 import warnings
 warnings.filterwarnings("ignore")
 
-signalmodel = load_model('signalmodelCNN')
-locmodel = load_model('locmodelCNN')
+signalmodel = load_model('signalmodelCNN_v2_2 n_steps 3')
+locmodel = load_model('locmodelCNN_v2_2 n_steps 5')
 
 def predict(trace):
     
@@ -19,16 +19,16 @@ def predict(trace):
     roll_long = 50
 
     # For location segments
-    window_step = 30
-    window_size = 30
+    window_step = 20
+    window_size = 20
     
     # Step size for CNN
     n_steps_sig = 3
     n_steps_loc = 5
     
     # Probability cut-offs
-    p_prob = 0.1 # for p-wave
-    s_prob = 0.1 # for signal
+    p_prob = 0.15 # for p-wave
+    s_prob = 0.15 # for signal
     
     ## Reading in Trace and Splitting Channels
     sig_trace = trace.normalize()
@@ -99,10 +99,10 @@ def predict(trace):
     
     # Since we know if there is a p-wave, it will be in the last 3 seconds:
     end_ind = len(prob_vec)
-    beg_ind = len(prob_vec) - int(3*window_size/samp_rate + 1)
+    beg_ind = len(prob_vec) - int(3*samp_rate/window_size + 1)
     p_segment = beg_ind + np.where(prob_vec[beg_ind:end_ind] == max(prob_vec[beg_ind:end_ind]))[0][0]
         
-    tick_delta = (p_segment + 0.5)*window_step + (roll_long - 1)
+    tick_delta = p_segment*window_step + 0.5*window_size + (roll_long - 1)
         
     time_delta = (tick_delta)/samp_rate
     p_time = start_time + time_delta
