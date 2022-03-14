@@ -27,8 +27,8 @@ def predict(trace):
     n_steps_loc = 2
     
     # Probability cut-offs
-    p_prob = 0.15 # for p-wave
-    s_prob = 0.15 # for signal
+    p_prob = 0.35 # for p-wave
+    s_prob = 0.2 # for signal
     
     ## Reading in Trace and Splitting Channels
     sig_trace = trace.normalize()
