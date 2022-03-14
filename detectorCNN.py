@@ -8,8 +8,8 @@ from tensorflow.keras.models import load_model
 import warnings
 warnings.filterwarnings("ignore")
 
-signalmodel = load_model('signalmodelCNN_v2_2 n_steps 3')
-locmodel = load_model('locmodelCNN_v2_2 n_steps 5')
+signalmodel = load_model('signalmodelCNN_v3')
+locmodel = load_model('locmodelCNN_v3')
 
 def predict(trace):
     
@@ -24,7 +24,7 @@ def predict(trace):
     
     # Step size for CNN
     n_steps_sig = 3
-    n_steps_loc = 5
+    n_steps_loc = 2
     
     # Probability cut-offs
     p_prob = 0.15 # for p-wave
