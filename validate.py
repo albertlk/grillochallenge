@@ -6,7 +6,7 @@ Please change the script so it incorporates your model.
 """
 Place your imports and setup between here...
 """
-from detectorCNN import predict
+from detectorCNN_LSTM import predict
 """
 ...and here
 """
@@ -20,7 +20,7 @@ from obspy.core import read
 import matplotlib.pyplot as plt
 
 # set variables
-## random.seed(0)
+random.seed(0)
 accuracy = .5 # max time difference in seconds
 p_win = (.5, 3) # setting limits for P-wave 
 sampling_rate = 31.25
@@ -150,10 +150,10 @@ print('////////////////////')
 print(' ')
 
 # plot misfits
-out = plt.hist(hit_accuracy, bins=np.arange(-2, 2, .05))
-plt.vlines(-accuracy, 0, max(out[0]), color=[.2, .2, .2])
-plt.vlines(accuracy, 0, max(out[0]), color=[.2, .2, .2])
-plt.xlabel("Misfit [s]")
-plt.ylabel("Number of segments")
-plt.savefig("misfit.png")
-plt.show()
+#out = plt.hist(hit_accuracy, bins=np.arange(-2, 2, .05))
+#plt.vlines(-accuracy, 0, max(out[0]), color=[.2, .2, .2])
+#plt.vlines(accuracy, 0, max(out[0]), color=[.2, .2, .2])
+#plt.xlabel("Misfit [s]")
+#plt.ylabel("Number of segments")
+#plt.savefig("misfit.png")
+#plt.show()
